@@ -1,6 +1,6 @@
-package org.qa.BaiTap1;
+package org.qa;
 
-import config.Init;
+import config.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class AssertExample extends Init {
+public class AssertExample extends ConfigReader {
     @Test
     public void UpdateProfile() {
         driver.navigate().to("https://automationexercise.com/login");

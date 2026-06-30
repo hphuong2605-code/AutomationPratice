@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeTest;
 
 import java.time.Duration;
 
-public class Init {
+public class ConfigReader {
     public WebDriver driver;
     @BeforeTest
     public void setup() {
