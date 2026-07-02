@@ -5,19 +5,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import java.io.InputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 public class ConfigReader {
-    public WebDriver driver;
-    @BeforeTest
-    public void setup() {
-        driver = new ChromeDriver(); // initial value for browser
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.manage().window().maximize();
+    private static final Properties prop = new Properties();
+
+    static {
+        try(InputStream in = ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if(in == null) {
+                throw new RuntimeException("config.properties file not found");
+            }
+            prop.load(in);
+        }catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-    @AfterTest
-    public void teardown() {
-        driver.quit();
+    public static String get(String key){
+        return prop.getProperty(key);
     }
 }
